@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: "Store"
+    # h2 database setup
+    h2:
+        console.enabled: true
+    datasource:
+        url: jdbc:h2:mem:storeDb
+        driver-class-name: org.h2.Driver
+        username: user
+        password: pass
+    jpa:
+        spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            database-platform: org.hibernate.dialect.H2Dialect
+            show-sql: true
+            ddl-auto: create-drop
