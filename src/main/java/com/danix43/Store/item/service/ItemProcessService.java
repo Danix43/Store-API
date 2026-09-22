@@ -8,12 +8,12 @@ import com.danix43.Store.item.model.Item;
 
 public interface ItemProcessService {
 
-    public List<Item> getAllItems();
+    public List<ItemDTO> getAllItems();
 
     public Optional<Item> getItemById(Long id);
 
     public Optional<Item> getItemByName(String name);
 
-    public ItemDTO saveNewItem(ItemDTO item);
+    public Item saveNewItem(Item newItem);
 
 }

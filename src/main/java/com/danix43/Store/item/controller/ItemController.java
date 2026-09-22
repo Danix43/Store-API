@@ -3,6 +3,7 @@ package com.danix43.Store.item.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.danix43.Store.item.dto.ItemDTO;
 import com.danix43.Store.item.model.Item;
 import com.danix43.Store.item.service.ItemProcessService;
 import com.danix43.Store.item.service.ItemProcessServiceImpl;
@@ -14,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/items")
@@ -28,7 +31,7 @@ public class ItemController {
     }
 
     @GetMapping("/all")
-    public List<Item> getAllItems() {
+    public List<ItemDTO> getAllItems() {
         return itemService.getAllItems();
     }
 
@@ -42,8 +45,14 @@ public class ItemController {
             logger.info("Searching for item with name: {}", name);
             return itemService.getItemByName(name);
         } else {
+            logger.warn("No id or name specified in the url params");
             return Optional.empty();
         }
+    }
+
+    @PostMapping("/newItem")
+    public Item postNewItem(@RequestBody Item entity) {
+        return itemService.saveNewItem(entity);
     }
 
 }

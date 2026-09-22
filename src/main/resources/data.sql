@@ -66,3 +66,5 @@ VALUES (1, 'Item1', 'Items1 description', 10.2, 5),
         119.0,
         22
     );
+
+ALTER SEQUENCE item_seq RESTART WITH 19;
