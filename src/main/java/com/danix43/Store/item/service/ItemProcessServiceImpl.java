@@ -28,10 +28,15 @@ public class ItemProcessServiceImpl implements ItemProcessService {
     }
 
     @Override
-    public Item saveNewItem(Item newItem) {
+    public ItemDTO saveNewItem(ItemDTO newItem) {
         logger.info("saved a new item entity: {}", newItem);
-        newItem.setId(null);
-        return itemRepository.save(newItem);
+
+        Item item = modelMapper.map(newItem, Item.class);
+        item.setId(null);
+
+        itemRepository.save(item);
+
+        return newItem;
     }
 
     @Override
@@ -49,13 +54,27 @@ public class ItemProcessServiceImpl implements ItemProcessService {
     }
 
     @Override
-    public Optional<Item> getItemByName(String name) {
-        return itemRepository.findByName(name);
+    public Optional<ItemDTO> getItemByName(String name) {
+        Optional<Item> foundItem = itemRepository.findByName(name);
+
+        if (foundItem.isPresent()) {
+            ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
+            return Optional.of(itemDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
-    public Optional<Item> getItemById(Long id) {
-        return itemRepository.findById(id);
+    public Optional<ItemDTO> getItemById(Long id) {
+        Optional<Item> foundItem = itemRepository.findById(id);
+
+        if (foundItem.isPresent()) {
+            ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
+            return Optional.of(itemDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
 }

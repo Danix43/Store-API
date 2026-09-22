@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danix43.Store.item.dto.ItemDTO;
-import com.danix43.Store.item.model.Item;
 import com.danix43.Store.item.service.ItemProcessService;
 import com.danix43.Store.item.service.ItemProcessServiceImpl;
 
@@ -36,7 +35,7 @@ public class ItemController {
     }
 
     @GetMapping("/item")
-    public Optional<Item> getItemById(@RequestParam(required = false) Long id,
+    public Optional<ItemDTO> getItemById(@RequestParam(required = false) Long id,
             @RequestParam(required = false) String name) {
         if (id != null) {
             logger.info("Searching for item with ID: {}", id);
@@ -51,7 +50,7 @@ public class ItemController {
     }
 
     @PostMapping("/newItem")
-    public Item postNewItem(@RequestBody Item entity) {
+    public ItemDTO postNewItem(@RequestBody ItemDTO entity) {
         return itemService.saveNewItem(entity);
     }
 
