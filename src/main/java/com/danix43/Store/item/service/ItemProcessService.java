@@ -10,7 +10,9 @@ public interface ItemProcessService {
 
     public List<Item> getAllItems();
 
-    public Optional<Item> getItemById(long id);
+    public Optional<Item> getItemById(Long id);
+
+    public Optional<Item> getItemByName(String name);
 
     public ItemDTO saveNewItem(ItemDTO item);
 

@@ -39,7 +39,12 @@ public class ItemProcessServiceImpl implements ItemProcessService {
     }
 
     @Override
-    public Optional<Item> getItemById(long id) {
+    public Optional<Item> getItemByName(String name) {
+        return itemRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Item> getItemById(Long id) {
         return itemRepository.findById(id);
     }
 

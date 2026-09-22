@@ -10,12 +10,16 @@ import com.danix43.Store.item.service.ItemProcessServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
+
+    private final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
     private final ItemProcessService itemService;
 
@@ -28,9 +32,18 @@ public class ItemController {
         return itemService.getAllItems();
     }
 
-    @GetMapping("/:id")
-    public Optional<Item> getItemById(@RequestParam long id) {
-        return itemService.getItemById(id);
+    @GetMapping("/item")
+    public Optional<Item> getItemById(@RequestParam(required = false) Long id,
+            @RequestParam(required = false) String name) {
+        if (id != null) {
+            logger.info("Searching for item with ID: {}", id);
+            return itemService.getItemById(id);
+        } else if (name != null) {
+            logger.info("Searching for item with name: {}", name);
+            return itemService.getItemByName(name);
+        } else {
+            return Optional.empty();
+        }
     }
 
 }
