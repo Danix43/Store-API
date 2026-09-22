@@ -1,13 +1,13 @@
 package com.danix43.Store.item.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.danix43.Store.item.dto.ItemDTO;
@@ -73,7 +73,7 @@ public class ItemProcessServiceImpl implements ItemProcessService {
             ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
             return Optional.of(itemDTO);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException();
         }
     }
 
@@ -85,7 +85,7 @@ public class ItemProcessServiceImpl implements ItemProcessService {
             ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
             return Optional.of(itemDTO);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException();
         }
     }
 
