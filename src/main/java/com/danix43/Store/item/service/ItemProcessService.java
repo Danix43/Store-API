@@ -15,4 +15,5 @@ public interface ItemProcessService {
 
     public ItemDTO saveNewItem(ItemDTO newItem);
 
+    public String bulkSaveNewItems(List<ItemDTO> newItems);
 }

@@ -1,6 +1,7 @@
 package com.danix43.Store.item.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,17 @@ public class ItemProcessServiceImpl implements ItemProcessService {
         itemRepository.save(item);
 
         return newItem;
+    }
+
+    @Override
+    public String bulkSaveNewItems(List<ItemDTO> newItems) {
+        if (newItems.isEmpty())
+            return "Empty list to save";
+
+        for (ItemDTO elm : newItems) {
+            saveNewItem(elm);
+        }
+        return "Bulk item saving processed";
     }
 
     @Override
