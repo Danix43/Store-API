@@ -46,7 +46,8 @@ class ItemProcessServiceTest {
     void testGetItemByIdWhenItemExists() {
         long id = 1L;
 
-        Optional<ItemDTO> optionalItem = Optional.of(new ItemDTO("Test Item", "Test Item Description", 10.0, 5));
+        Optional<ItemDTO> optionalItem = Optional
+                .of(new ItemDTO("Test Item", "Test Item Description", 10.0, 5, 10, "image link"));
 
         when(itemService.getItemById(id)).thenReturn((optionalItem));
 
@@ -59,7 +60,8 @@ class ItemProcessServiceTest {
     void testGetItemByNameWhenItemExists() {
         String name = "Test Item";
 
-        Optional<ItemDTO> optionalItem = Optional.of(new ItemDTO(name, "Test Item Description", 10.0, 5));
+        Optional<ItemDTO> optionalItem = Optional
+                .of(new ItemDTO(name, "Test Item Description", 10.0, 5, 10, "image link"));
 
         when(itemService.getItemByName(name)).thenReturn((optionalItem));
 

@@ -22,5 +22,9 @@ public class Item {
 
     private Double price;
 
+    private Integer quantity;
+
+    private String imageLink;
+
     private Integer reviewsQuantity;
 }
