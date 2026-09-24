@@ -18,13 +18,15 @@ public class Item {
     @Column(nullable = false)
     private String name;
 
+    private Integer stockQty;
+
+    private String sku;
+
+    private Categories category;
+
     private String description;
 
     private Double price;
 
-    private Integer quantity;
-
     private String imageLink;
-
-    private Integer reviewsQuantity;
 }

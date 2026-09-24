@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Locale.Category;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.danix43.Store.item.dto.ItemDTO;
+import com.danix43.Store.item.model.Categories;
 import com.danix43.Store.item.repository.ItemRepository;
 import com.danix43.Store.item.service.ItemProcessServiceImpl;
 
@@ -47,7 +49,7 @@ class ItemProcessServiceTest {
         long id = 1L;
 
         Optional<ItemDTO> optionalItem = Optional
-                .of(new ItemDTO("Test Item", "Test Item Description", 10.0, 5, 10, "image link"));
+                .of(new ItemDTO(id, "Test Item", Categories.CATEGORY1, 10.0, 5, "image link"));
 
         when(itemService.getItemById(id)).thenReturn((optionalItem));
 
@@ -61,7 +63,7 @@ class ItemProcessServiceTest {
         String name = "Test Item";
 
         Optional<ItemDTO> optionalItem = Optional
-                .of(new ItemDTO(name, "Test Item Description", 10.0, 5, 10, "image link"));
+                .of(new ItemDTO(null, name, Categories.CATEGORY1, 10.0, 5, "image link"));
 
         when(itemService.getItemByName(name)).thenReturn((optionalItem));
 

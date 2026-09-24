@@ -1,5 +1,7 @@
 package com.danix43.Store.item.dto;
 
+import com.danix43.Store.item.model.Categories;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemDTO {
 
-    private Long id;
+    private String sku;
     private String name;
-    private String description;
+    private Categories category;
     private Double price;
-    private Integer reviewsQuantity;
-    private Integer quantity;
+    private Integer qty;
     private String imageLink;
 }
