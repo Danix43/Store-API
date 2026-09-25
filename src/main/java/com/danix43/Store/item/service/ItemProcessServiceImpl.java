@@ -88,4 +88,9 @@ public class ItemProcessServiceImpl implements ItemProcessService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<ItemDTO> getItemBySku(String sku) {
+        return Optional.of(modelMapper.map(itemRepository.findBySku(sku), ItemDTO.class));
+    }
+
 }

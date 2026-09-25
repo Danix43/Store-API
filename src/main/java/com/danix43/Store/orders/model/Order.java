@@ -2,16 +2,14 @@ package com.danix43.Store.orders.model;
 
 import java.util.List;
 
-import com.danix43.Store.item.model.Item;
+import com.danix43.Store.item.dto.OrderItemDTO;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -47,9 +45,11 @@ public class Order {
     @Column(name = "CARD_CVC")
     private Integer cardCVC;
 
-    @ManyToMany
-    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "products_id"))
-    private List<Item> products;
+    // @ManyToMany
+    // @JoinTable(name = "order_products", joinColumns = @JoinColumn(name =
+    // "order_id"), inverseJoinColumns = @JoinColumn(name = "products_id"))
+    @ElementCollection
+    private List<OrderItemDTO> products;
 
     private Double subtotal;
     private Double shipping;

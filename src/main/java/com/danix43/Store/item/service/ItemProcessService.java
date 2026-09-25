@@ -13,7 +13,10 @@ public interface ItemProcessService {
 
     public Optional<ItemDTO> getItemByName(String name);
 
+    public Optional<ItemDTO> getItemBySku(String sku);
+
     public ItemDTO saveNewItem(ItemDTO newItem);
 
     public String bulkSaveNewItems(List<ItemDTO> newItems);
+
 }

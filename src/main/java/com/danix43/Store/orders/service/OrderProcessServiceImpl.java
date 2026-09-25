@@ -7,9 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.danix43.Store.item.dto.ItemDTO;
-import com.danix43.Store.item.model.Item;
-import com.danix43.Store.item.repository.ItemRepository;
+import com.danix43.Store.item.service.ItemProcessService;
+import com.danix43.Store.item.service.ItemProcessServiceImpl;
 import com.danix43.Store.orders.dto.OrderDTO;
 import com.danix43.Store.orders.model.Order;
 import com.danix43.Store.orders.repository.OrderRepository;
@@ -22,11 +21,11 @@ public class OrderProcessServiceImpl implements OrderProcessService {
     private final ModelMapper modelMapper;
 
     private final OrderRepository orderRepository;
-    private final ItemRepository itemRepository;
+    private final ItemProcessService itemService;
 
-    public OrderProcessServiceImpl(OrderRepository ordRepo, ItemRepository itmRepo) {
+    public OrderProcessServiceImpl(OrderRepository ordRepo, ItemProcessServiceImpl itmProcServ) {
         this.orderRepository = ordRepo;
-        this.itemRepository = itmRepo;
+        this.itemService = itmProcServ;
         this.modelMapper = new ModelMapper();
     }
 
@@ -38,37 +37,14 @@ public class OrderProcessServiceImpl implements OrderProcessService {
                 .toList();
     }
 
-    // FIXME fix this function
     @Override
     public OrderDTO saveNewOrder(OrderDTO payload) {
         if (payload == null) {
             return null;
         }
 
-        Order newOrder = new Order();
+        Order newOrder = modelMapper.map(payload, Order.class);
         newOrder.setId(null);
-        newOrder.setEmail(payload.getEmail());
-        newOrder.setDeliveryAddress(payload.getDeliveryAddress());
-        newOrder.setDeliveryCity(payload.getDeliveryCity());
-        newOrder.setDeliveryPostalCode(payload.getDeliveryPostalCode());
-        newOrder.setDeliveryCountry(payload.getDeliveryCountry());
-        newOrder.setPaymentType(payload.getPaymentType());
-        newOrder.setCardNumber(payload.getCardNumber());
-        newOrder.setCardName(payload.getCardName());
-        newOrder.setCardExpiry(payload.getCardExpiry());
-        newOrder.setCardCVC(payload.getCardCVC());
-        newOrder.setSubtotal(payload.getSubtotal());
-        newOrder.setShipping(payload.getShipping());
-        newOrder.setTotal(payload.getTotal());
-
-        List<Item> orderProducts = payload.getProducts() == null ? List.of()
-                : payload.getProducts().stream()
-                        .map(product -> itemRepository.findBySku(product.getSku())
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                        "Item not found for sku: " + product.getSku())))
-                        .toList();
-
-        newOrder.setProducts(orderProducts);
 
         Order savedOrder = orderRepository.save(newOrder);
 
