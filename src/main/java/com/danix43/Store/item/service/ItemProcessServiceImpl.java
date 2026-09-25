@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.danix43.Store.item.dto.ItemDTO;
@@ -17,7 +16,7 @@ import com.danix43.Store.item.repository.ItemRepository;
 @Service
 public class ItemProcessServiceImpl implements ItemProcessService {
 
-    Logger logger = LoggerFactory.getLogger(ItemProcessServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(ItemProcessServiceImpl.class);
 
     private final ModelMapper modelMapper;
 
@@ -72,9 +71,9 @@ public class ItemProcessServiceImpl implements ItemProcessService {
         if (foundItem.isPresent()) {
             ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
             return Optional.of(itemDTO);
-        } else {
-            throw new ResourceNotFoundException();
         }
+
+        return Optional.empty();
     }
 
     @Override
@@ -84,9 +83,9 @@ public class ItemProcessServiceImpl implements ItemProcessService {
         if (foundItem.isPresent()) {
             ItemDTO itemDTO = modelMapper.map(foundItem.get(), ItemDTO.class);
             return Optional.of(itemDTO);
-        } else {
-            throw new ResourceNotFoundException();
         }
+
+        return Optional.empty();
     }
 
 }

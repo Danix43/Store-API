@@ -2,7 +2,8 @@ package com.danix43.Store.orders.dto;
 
 import java.util.List;
 
-import com.danix43.Store.item.model.Item;
+import com.danix43.Store.item.dto.ItemDTO;
+import com.danix43.Store.item.dto.OrderItemDTO;
 import com.danix43.Store.orders.model.PaymentType;
 
 import lombok.Data;
@@ -26,7 +27,7 @@ public class OrderDTO {
     private Integer cardCVC;
 
     // order info
-    private List<Item> products;
+    private List<OrderItemDTO> products;
     private Double subtotal;
     private Double shipping;
     private Double total;

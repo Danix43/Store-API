@@ -1,8 +1,0 @@
-DB:
-    - add initial data inside h2 database
-
-ItemController:
-    - add to the mappings response entities with corresponding http codes
-
-GlobalExceptionHandler:
-    - add more exceptions
