@@ -1,6 +1,7 @@
 package com.danix43.Store.orders.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -51,5 +52,16 @@ public class OrderProcessServiceImpl implements OrderProcessService {
         OrderDTO savedDto = modelMapper.map(savedOrder, OrderDTO.class);
         savedDto.setProducts(payload.getProducts());
         return savedDto;
+    }
+
+    @Override
+    public Optional<OrderDTO> findOrderByEmail(String email) {
+        Optional<Order> foundOrder = orderRepository.findByEmail(email);
+
+        if (foundOrder.isPresent()) {
+            return Optional.of(modelMapper.map(foundOrder, OrderDTO.class));
+        }
+
+        return Optional.empty();
     }
 }

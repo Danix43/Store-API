@@ -15,6 +15,7 @@ import com.danix43.Store.orders.service.OrderProcessServiceImpl;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -31,6 +32,11 @@ public class OrdersController {
     @GetMapping("/all")
     public ResponseEntity<List<OrderDTO>> getOrder() {
         return ResponseEntity.ok(orderService.getOrders());
+    }
+
+    @GetMapping("/order")
+    public ResponseEntity<OrderDTO> getOrderByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(orderService.findOrderByEmail(email).get());
     }
 
     @PostMapping("/newOrder")
