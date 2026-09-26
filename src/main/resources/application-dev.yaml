@@ -15,6 +15,11 @@ spring:
         defer-datasource-initialization: true
         hibernate:
             ddl-auto: create-drop
+security:
+    jwt:
+        secret-key: 4a8c7ef1a2a9e6bca8b74295fff239ac2e2d607a6cc8854f6127b6129b9566cb
+        # 24 hour expiration time
+        expiration-time: 86400000
 logging:
     level:
         web: DEBUG
