@@ -1,8 +1,8 @@
 package com.danix43.Store.orders.dto;
 
+import java.sql.Date;
 import java.util.List;
 
-import com.danix43.Store.item.dto.ItemDTO;
 import com.danix43.Store.item.dto.OrderItemDTO;
 import com.danix43.Store.orders.model.PaymentType;
 
@@ -32,4 +32,5 @@ public class OrderDTO {
     private Double shipping;
     private Double total;
 
+    private Date dateOfPurchase;
 }

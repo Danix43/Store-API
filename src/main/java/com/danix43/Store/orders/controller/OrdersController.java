@@ -34,6 +34,11 @@ public class OrdersController {
         return ResponseEntity.ok(orderService.getOrders());
     }
 
+    @GetMapping("")
+    public ResponseEntity<List<OrderDTO>> getOrdersByDate(@RequestParam String date) {
+        return ResponseEntity.ok(orderService.findOrdersByDate(date));
+    }
+
     @GetMapping("/order")
     public ResponseEntity<OrderDTO> getOrderByEmail(@RequestParam String email) {
         return ResponseEntity.ok(orderService.findOrderByEmail(email).get());

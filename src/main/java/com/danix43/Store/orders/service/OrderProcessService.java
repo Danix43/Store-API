@@ -12,4 +12,6 @@ public interface OrderProcessService {
     public OrderDTO saveNewOrder(OrderDTO payload);
 
     public Optional<OrderDTO> findOrderByEmail(String email);
+
+    public List<OrderDTO> findOrdersByDate(String date);
 }

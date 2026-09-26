@@ -1,5 +1,6 @@
 package com.danix43.Store.orders.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.danix43.Store.item.dto.OrderItemDTO;
@@ -54,4 +55,6 @@ public class Order {
     private Double subtotal;
     private Double shipping;
     private Double total;
+
+    private Date dateOfPurchase;
 }

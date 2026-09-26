@@ -1,5 +1,7 @@
 package com.danix43.Store.orders.service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,5 +65,19 @@ public class OrderProcessServiceImpl implements OrderProcessService {
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public List<OrderDTO> findOrdersByDate(String dateInputed) {
+        Date date = Date.valueOf(dateInputed);
+
+        return orderRepository.findAllByDateOfPurchase(date)
+                .stream()
+                .map(order -> modelMapper.map(order, OrderDTO.class))
+                .toList();
+    }
+
+    private Timestamp extractDateFromTimestamp(String dateInputed) {
+        return null;
     }
 }
