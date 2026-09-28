@@ -36,10 +36,14 @@ public class UserAuthentificationService {
     }
 
     public User authenticate(LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        return authenticate(request.getEmail(), request.getPassword());
+    }
 
-        return userRepository.findByEmail(request.getEmail()).orElseThrow();
+    public User authenticate(String email, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+
+        return userRepository.findByEmail(email).orElseThrow();
     }
 
 }

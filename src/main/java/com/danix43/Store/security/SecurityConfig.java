@@ -33,7 +33,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/api/auth/**")
+                        auth -> auth.requestMatchers("/api/auth/**", "/api/items/all")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
@@ -48,7 +48,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://localhost:8080"));
+        config.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:5173"));
         config.setAllowedMethods(List.of("GET", "POST"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 

@@ -31,15 +31,27 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> postRegisterNewUser(@RequestBody RegisterRequest entity) {
+    public ResponseEntity<LoginResponse> postRegisterNewUser(@RequestBody RegisterRequest entity) {
         User registeredUser = authentificationService.registerUser(entity);
-        return ResponseEntity.ok(registeredUser);
+
+        // TODO refactor this into a function
+        // User authedUser =
+        // authentificationService.authenticate(registeredUser.getEmail(),
+        // registeredUser.getPassword());
+        String jwtToken = jwtService.generateToken(registeredUser);
+
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwtToken);
+        loginResponse.setExpiresIn(jwtService.getExpirationTime());
+
+        return ResponseEntity.ok(loginResponse);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> getLoginToken(@RequestBody LoginRequest entity) {
         User authUser = authentificationService.authenticate(entity);
 
+        // TODO refactor this into a function
         String jwtToken = jwtService.generateToken(authUser);
 
         LoginResponse loginResponse = new LoginResponse();
