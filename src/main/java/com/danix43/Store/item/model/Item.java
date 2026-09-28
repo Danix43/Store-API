@@ -2,6 +2,8 @@ package com.danix43.Store.item.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +27,7 @@ public class Item {
     @Column(unique = true)
     private String sku;
 
+    @Enumerated(EnumType.STRING)
     private Categories category;
 
     private String description;

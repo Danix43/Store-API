@@ -23,3 +23,5 @@ security:
 logging:
     level:
         web: DEBUG
+        org.springdoc: DEBUG
+        io.swagger.v3: DEBUG

@@ -8,6 +8,8 @@ import com.danix43.Store.item.dto.OrderItemDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,6 +37,7 @@ public class Order {
 
     private String deliveryCountry;
 
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
     private String cardNumber;
